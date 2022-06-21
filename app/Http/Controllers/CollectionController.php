@@ -16,47 +16,60 @@ class CollectionController extends Controller
     {
         //$json = Http::get('https://dev.shepherd.appoly.io/fruit.json')->json();
 
-        $response = Http::get('https://dev.shepherd.appoly.io/fruit.json');
+        // $response = Http::get('https://dev.shepherd.appoly.io/fruit.json');
         
-        $data_json = $response->object();
+        // $data_json = $response->object();
 
-        $this->items = collect($data_json->menu_items);
+        $json = Http::get('https://dev.shepherd.appoly.io/fruit.json')
+                          ->json();
+        $this->items = collect($json['menu_items']);
+
+        //$json = Http::get('https://dev.shepherd.appoly.io/fruit.json');
+
+        //var_dump($json);
+
+        //$this->items = collect($json['menu_items']);
+
+        //$this->items = collect($data_json->menu_items);
         
         $collections =  $this->items;
 
-        //$data = $collections->all();
+        //$flattened = $collections->flatten()->sort();
 
-        var_dump($collections);
+        //$flattened = $collections->flatten()->filter()->values()->sort();
 
-        // return $collections->map(function ($item, $key) {
-        //   if (is_array($item)){
-        //     echo '--' . $item['label'];
-        //     echo '<br>';
-        //     continue;
-        //     }else
-        //     {
-        //     echo '--' . $item['label'];
-        //     echo '<br>';
-        //     }
-          // echo $item->label . '--';
-          // $itemObjects = $item->children;
-          // if (!empty($itemObject)){
-          // return   $itemObjects->map(function ($itemObject, $key) {
-          //     echo $itemObject->label . '--';
-          //   });
-          // }
-        // });
+        // $flattened->map(function ($item, $key) {
+        //       echo $item . "--" . $key . "--";
+        //   });
 
-        
-      //  return $collections->map(function ($item, $key) {
-      //     echo $item->label . '--';
-      //     $itemObjects = $item->children;
-      //     if (!empty($itemObject)){
-      //     return   $itemObjects->map(function ($itemObject, $key) {
-      //         echo $itemObject->label . '--';
-      //       });
-      //     }
+        //dd($flattened);
+
+        //dd($collections);
+
+        //$flattened = $collections->flatten()->sort();
+
+        //  $flattened = $collections->flatten()->values();
+
+        // $flattened->map(function ($item, $key) {
+        //       echo $item . "--" . $key . "--";
+        //   });
+
+        //dd($flattened);
+
+//         $data = $collections->flatMap(function($value){
+//           return $value;
+//         });
+
+// dd($data->flatten());
+
+        // return $flattened->all();
+
+      //  return $collections->flatMap(function ($value) {
+      //       return $value['label'];
       //   });
 
+      //  return $flattened->all();
+
   }
+
 }
